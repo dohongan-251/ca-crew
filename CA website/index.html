@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Tiêu đề hiển thị trên thẻ tab trình duyệt theo yêu cầu layout -->
+    <title>CA crew</title>
+    
+    <!-- Link favicon (nếu muốn đổi icon nhỏ trên tab) -->
+    <link rel="icon" href="ca-logo-purple.jpg" type="image/x-icon">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        /* 1. Thiết lập chung cho toàn bộ trang */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden; /* Khóa thanh cuộn để giữ nguyên khung hình full màn */
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        /* 2. Container Background Full màn hình */
+        .hero-section {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            /* Đường dẫn hình background chính */
+            background-image: url('background-ca.jpg');
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            
+            /* Tùy chỉnh độ rõ/mờ trực tiếp bằng CSS nếu cần */
+            /* filter: contrast(105%) brightness(100%); */
+        }
+
+        /* Lớp phủ nhẹ giúp các nút logo nổi bật trên nền */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.15);
+            z-index: 1;
+        }
+
+        /* Khu vực chứa 2 logo ở phía dưới theo đúng layout */
+        .logos-container {
+            position: absolute;
+            bottom: 18%; /* Cách đáy màn hình 18% */
+            left: 0;
+            width: 100%;
+            padding: 0 10%; /* Khoảng cách cách hai mép lề trái/phải */
+            z-index: 2;
+        }
+
+        /* 3 & 4. Định dạng khung thẻ chứa Logo & Hiệu ứng Phồng (Zoom) */
+        .logo-card {
+            display: inline-block;
+            text-decoration: none;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+            border-radius: 50%; /* Bo tròn hình ảnh */
+            position: relative;
+        }
+
+        .logo-img {
+            width: 220px;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 50%; /* Bo tròn hoàn toàn hình ảnh */
+            border: 6px solid #ffffff;
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.35);
+            transition: border-color 0.3s ease;
+        }
+
+        /* Hiệu ứng HOVER: Phồng ra khi di chuột vào */
+        .logo-card:hover {
+            transform: scale(1.22); /* Tăng kích thước 22% */
+        }
+
+        .logo-card:hover .logo-img {
+            border-color: #ffde59; /* Đổi màu viền vàng nổi bật khi rê chuột */
+            box-shadow: 0 18px 35px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Nhãn hiển thị tên bên dưới khi Hover */
+        .logo-label {
+            position: absolute;
+            bottom: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.75);
+            color: #ffffff;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s ease, bottom 0.3s ease;
+            pointer-events: none;
+        }
+
+        .logo-card:hover .logo-label {
+            opacity: 1;
+            bottom: -42px;
+        }
+
+        /* Tối ưu hiển thị Responsive cho màn hình nhỏ/máy tính bảng */
+        @media (max-width: 768px) {
+            .logo-img {
+                width: 140px;
+                height: 140px;
+                border-width: 4px;
+            }
+            .logos-container {
+                bottom: 5%;
+                padding: 0 5%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Container chính chứa Background Full màn hình -->
+    <div class="hero-section">
+        <div class="overlay"></div>
+
+        <!-- Sử dụng Grid của Bootstrap để căn 2 logo 2 bên trái/phải -->
+        <div class="logos-container">
+            <div class="row w-100 justify-content-between align-items-center m-0">
+                
+                <!-- Mục 3: Logo CA Thường (Bên trái) - Hình chó nền tím -->
+                <div class="col-auto">
+                    <a href="https://google.com" target="_blank" class="logo-card" id="btn-ca-normal">
+                        <img src="ca-logo-purple.jpg" alt="CA Logo Normal" class="logo-img">
+                        <span class="logo-label">Khám phá trang chính CA</span>
+                    </a>
+                </div>
+
+                <!-- Mục 4: Logo CA Travel (Bên phải) - Hình chó cài bông -->
+                <div class="col-auto">
+                    <a href="https://youtube.com" target="_blank" class="logo-card" id="btn-ca-travel">
+                        <img src="ca-travel-flower.jpg" alt="CA Travel Logo" class="logo-img">
+                        <span class="logo-label">Khám phá CA Travel</span>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Nạp thư viện JS: Bootstrap & jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bundle.min.js"></script>
+
+    <!-- JavaScript & jQuery Tùy biến tương tác -->
+    <script>
+        $(document).ready(function() {
+            // Hiệu ứng âm thanh/nhấp nháy nhẹ bằng jQuery khi click vào logo
+            $('.logo-card').on('click', function(e) {
+                console.log("Đang chuyển hướng tới liên kết: " + $(this).attr('href'));
+            });
+
+            // Hiệu ứng phản hồi JavaScript nhỏ khi di chuyển chuột
+            $('.logo-card').hover(
+                function() {
+                    $(this).find('.logo-img').css('filter', 'brightness(1.08)');
+                },
+                function() {
+                    $(this).find('.logo-img').css('filter', 'brightness(1)');
+                }
+            );
+        });
+    </script>
+</body>
+</html>
