@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CA crew</title>
 
+    <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
@@ -24,6 +25,7 @@
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
+        /* KHU VỰC HERO CONTAINER */
         .hero-section {
             position: relative;
             width: 100%;
@@ -34,8 +36,8 @@
             background-repeat: no-repeat;
             display: flex;
             flex-direction: column;
-            justify-content: flex-end;
-            padding-bottom: 12vh;
+            justify-content: space-between; /* Đẩy Navbar lên đỉnh và Logo container xuống đáy */
+            padding-bottom: 8vh;
         }
 
         .overlay {
@@ -48,11 +50,66 @@
             z-index: 1;
         }
 
+        /* ==================== CUSTOM NAVBAR CONCEPT ==================== */
+        .custom-navbar-wrapper {
+            position: relative;
+            z-index: 20;
+            padding: 20px 30px 0 30px;
+        }
+
+        .custom-navbar {
+            background: rgba(230, 243, 250, 0.85); /* Nền xanh nhạt mờ chuẩn theo ảnh */
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 10px 25px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+
+        .navbar-brand-img {
+            height: 45px;
+            object-fit: contain;
+        }
+
+        /* Thanh Gradient Đỏ-Cam chứa các mục menu */
+        .nav-pill-container {
+            background: linear-gradient(90deg, #ff3b30 0%, #ff6b3b 50%, #ff8c42 100%);
+            border-radius: 30px;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+        }
+
+        .custom-navbar .nav-link {
+            color: #ffffff !important;
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 8px 24px !important;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        /* Nút Active (Trang chủ Home - Khung trắng chữ cam/đỏ) */
+        .custom-navbar .nav-link.active {
+            background-color: #ffffff !important;
+            color: #ff4b3a !important;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            font-weight: 700;
+        }
+
+        /* Hiệu ứng hover cho các nút khác */
+        .custom-navbar .nav-link:not(.active):hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #ffffff !important;
+        }
+
+        /* ==================== CỤM LOGO TRÒN Ở ĐÁY ==================== */
         .logos-container {
             position: relative;
             z-index: 10;
             width: 100%;
-            padding: 40% 25% 10% 0;
+            padding: 0 5%;
         }
 
         .logo-card {
@@ -76,10 +133,9 @@
             transition: transform 0.3s ease, border-color 0.3s ease;
         }
 
-        /* DÒNG CHỮ NHÃN: Mặc định ẨN (opacity: 0) và ĐẨY XUỐNG DƯỚI */
         .logo-label {
             position: absolute;
-            top: -10px; /* Đặt vị trí ẩn sát logo */
+            top: -10px;
             background: rgba(0, 0, 0, 0.85);
             color: #ffffff;
             padding: 6px 14px;
@@ -89,19 +145,16 @@
             white-space: nowrap;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
             pointer-events: none;
-            
-            /* ĐIỂM CỐT LÕI: Mặc định ẩn hoàn toàn */
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        /* KHI RÊ CHUỘT / CHẠM VÀO LOGO: Hiện chữ và trượt nhẹ lên trên */
         .logo-card:hover .logo-label,
         .logo-card:active .logo-label {
             opacity: 1;
             visibility: visible;
-            top: -45px; /* Trượt ngược lên phía trên đầu logo */
+            top: -45px;
         }
 
         .logo-card:active .logo-img,
@@ -110,14 +163,35 @@
             border-color: #ffde59;
         }
 
-        /* Responsive xoay ngang */
+        /* RESPONSIVE TRÊN ĐIỆN THOẠI */
+        @media (max-width: 991px) {
+            .custom-navbar-wrapper {
+                padding: 12px 12px 0 12px;
+            }
+            .nav-pill-container {
+                flex-direction: column;
+                background: transparent;
+                padding: 10px 0 0 0;
+                width: 100%;
+            }
+            .custom-navbar .nav-link {
+                width: 100%;
+                text-center: center;
+                background: linear-gradient(90deg, #ff3b30 0%, #ff8c42 100%);
+                margin-bottom: 6px;
+            }
+            .custom-navbar .nav-link.active {
+                background: #ffffff !important;
+            }
+        }
+
         @media (orientation: landscape) and (max-height: 500px) {
             .hero-section {
-                padding-bottom: 20px;
+                padding-bottom: 15px;
             }
             .logo-img {
-                width: 90px;
-                height: 90px;
+                width: 85px;
+                height: 85px;
                 border-width: 3px;
             }
             .logo-card:hover .logo-label,
@@ -126,11 +200,10 @@
             }
         }
 
-        /* Responsive màn hình dọc */
         @media (max-width: 480px) and (orientation: portrait) {
             .logo-img {
-                width: 130px;
-                height: 130px;
+                width: 120px;
+                height: 120px;
             }
         }
     </style>
@@ -140,13 +213,55 @@
     <div class="hero-section">
         <div class="overlay"></div>
 
-        <div class="logos-container">
+        <!-- ==================== NAVIGATION BAR ==================== -->
+        <div class="custom-navbar-wrapper">
+            <nav class="navbar navbar-expand-lg custom-navbar">
+                <div class="container-fluid p-0">
+                    
+                    <!-- LOGO BANNER CAtravel (Góc Trái) -->
+                    <a class="navbar-brand me-auto" href="#">
+                        <!-- Bạn có thể thay file ca-travel-flower.jpg bằng hình logo chữ CAtravel nếu có -->
+                        <img src="ca-travel-flower.jpg" alt="CA travel" class="navbar-brand-img rounded-pill">
+                        <span class="fw-bold ms-2 fs-5" style="color: #e84118;">CAtravel</span>
+                    </a>
+
+                    <!-- Nút Hamburger Menu khi thu nhỏ màn hình di động -->
+                    <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#caNavbar" aria-controls="caNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <!-- CỤM NÚT MENU VIÊN THUỐC GRADIENT (Góc Phải) -->
+                    <div class="collapse navbar-collapse justify-content-end" id="caNavbar">
+                        <div class="nav-pill-container mt-3 mt-lg-0">
+                            <ul class="navbar-nav align-items-center">
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="#">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Units</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">About Us</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Get Closer</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </nav>
+        </div>
+
+        <!-- ==================== CỤM LOGO NỔI BÊN DƯỚI ==================== -->
+        <div class="logos-container ms-0 me-0">
             <div class="row w-100 justify-content-center align-items-center m-0 g-3">
                 
                 <!-- LOGO TRÁI -->
                 <div class="col-6 text-center p-0">
                     <a href="https://google.com" target="_blank" class="logo-card">
-                        <span class="logo-label">Khám phá CA</span>
+                        <span class="logo-label">Trang chính CA</span>
                         <img src="ca-logo-purple.jpg" alt="CA Logo Normal" class="logo-img">
                     </a>
                 </div>
@@ -163,6 +278,7 @@
         </div>
     </div>
 
+    <!-- JS Bootstrap & jQuery -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bundle.min.js"></script>
 </body>
